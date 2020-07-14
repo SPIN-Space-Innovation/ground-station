@@ -1,0 +1,14 @@
+{
+  "name": "ground_station",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Themis Papameletiou <themicp@gmail.com>",
+  "license": "gpl-3.0",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
