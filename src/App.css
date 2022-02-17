@@ -1,0 +1,20 @@
+body {
+  background: #eee;
+}
+
+.app-bar .status {
+  text-align: center;
+}
+
+.app-bar .logo {
+  max-width: 40px;
+  margin-right: 20px;
+}
+
+.globe-wrapper {
+  margin-top: 20px;
+}
+
+.globe-wrapper canvas {
+  margin: auto
+}
