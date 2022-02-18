@@ -1,4 +1,6 @@
-import { FormGroup, FormControlLabel, Checkbox } from '@mui/material';
+import {
+  FormGroup, FormControlLabel, Checkbox, Grid,
+} from '@mui/material';
 import React from 'react';
 import Context from '../state/Context';
 
@@ -25,11 +27,13 @@ export default function RawLogs() {
   }, [logs]);
 
   return (
-    <div className="raw-logs-container">
-      <textarea ref={elem} className="raw-logs" value={logs.join('\n')} disabled />
-      <FormGroup className="live-toggle">
-        <FormControlLabel control={<Checkbox defaultChecked onChange={handleLiveToggle} />} label="Live" />
-      </FormGroup>
-    </div>
+    <Grid item xs={12} md={6}>
+      <div className="raw-logs-container">
+        <textarea ref={elem} className="raw-logs" value={logs.join('\n')} disabled />
+        <FormGroup className="live-toggle">
+          <FormControlLabel control={<Checkbox defaultChecked onChange={handleLiveToggle} />} label="Live" />
+        </FormGroup>
+      </div>
+    </Grid>
   );
 }

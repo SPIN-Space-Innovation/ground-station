@@ -12,6 +12,7 @@ import InternalStats from './components/InternalStats';
 import RawLogs from './components/RawLogs';
 
 import './App.css';
+import FSMControls from './components/FSMControls';
 
 function App() {
   const [state, dispatch] = React.useReducer(reducer, initialState);
@@ -41,12 +42,8 @@ function App() {
       <Context.Provider value={{ state: state.telemetry, dispatch }}>
         <Box sx={{ flexGrow: 1, padding: '10px' }}>
           <Grid container spacing={2}>
-            <Grid item xs={6}>
-              <RawLogs />
-            </Grid>
-            <Grid item xs={6}>
-              test
-            </Grid>
+            <RawLogs />
+            <FSMControls />
             <EnvironmentMetrics />
             <InternalStats />
             <InertialMeasurements />
