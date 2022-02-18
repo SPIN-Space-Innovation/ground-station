@@ -11,10 +11,11 @@ export default function InertialMeasurements() {
 
   return (
     <>
-      {['velocity', 'acceleration'].map((metric) => {
+      {['acceleration', 'angular_velocity'].map((metric) => {
         const unit = {
-          velocity: 'm/s',
           acceleration: 'm/s^2',
+          velocity: 'm/s',
+          angular_velocity: 'dps',
         }[metric];
         const label = _.capitalize(metric);
 

@@ -1,4 +1,4 @@
-export const receivedData = (data: TelemetryMessage) => ({
+export const receivedData = (data: string) => ({
   type: 'RECEIVED_DATA',
   payload: data,
 });

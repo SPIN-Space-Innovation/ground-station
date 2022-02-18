@@ -62,3 +62,35 @@ export function timeTickFormatter(timestamp: number | string) {
 
   return moment(timestamp).format('HH:mm:ss:SSS');
 }
+
+export function parseTelemetryMessage(message: string): ParsedMessage {
+  const parts = message.split(',');
+
+  const parsedMessage: ParsedMessage = {
+    message_type: parseInt(parts[0], 10) === 0 ? 'state' : 'debug',
+    packet_number: parseInt(parts[1], 10),
+    mission_elapsed_time: parseInt(parts[2], 10),
+    free_memory: parseInt(parts[3], 10),
+    battery_voltage: parseInt(parts[4], 10),
+    fsm_state: parts[5],
+    agl: parts.length >= 9 ? parseInt(parts[8], 10) : null,
+    acceleration: {
+      x: parts.length >= 9 ? parseInt(parts[9], 10) / 100 : null,
+      y: parts.length >= 9 ? parseInt(parts[10], 10) / 100 : null,
+      z: parts.length >= 9 ? parseInt(parts[11], 10) / 100 : null,
+    },
+    angular_velocity: {
+      x: parts.length >= 9 ? parseInt(parts[12], 10) : null,
+      y: parts.length >= 9 ? parseInt(parts[13], 10) : null,
+      z: parts.length >= 9 ? parseInt(parts[14], 10) : null,
+    },
+    gps: {
+      fixed: !!parseInt(parts[15], 10),
+      satellites: parts.length >= 9 ? parseInt(parts[16], 10) : null,
+      longitude: 0, // TODO
+      latitude: 0, // TODO
+    },
+  };
+
+  return parsedMessage;
+}

@@ -26,7 +26,7 @@ export default function EnvironmentMetrics() {
               <StatusCard label="Altitude" value={_.last(state.altitude) ? `${formatNumber((_.last(state.altitude) as any).value)}m` : 'Unknown'} />
             </Grid>
             <Grid item xs={6}>
-              <StatusCard label="Status Message" value={state.fsmState || 'Unknown'} />
+              <StatusCard label="State" value={state.fsmState || 'Unknown'} />
             </Grid>
           </Grid>
           <BiaxialLineChart options={{

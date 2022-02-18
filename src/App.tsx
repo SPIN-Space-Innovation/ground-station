@@ -22,8 +22,7 @@ function App() {
     socket.addEventListener('error', () => dispatch(actions.setSocketOpen(false)));
 
     socket.addEventListener('message', ({ data }) => {
-      data = JSON.parse(data);
-      dispatch(actions.receivedData(data as TelemetryMessage));
+      dispatch(actions.receivedData(data as string));
     });
 
     return () => {
