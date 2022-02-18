@@ -18,7 +18,7 @@ export default function InternalStats() {
   const { state } = React.useContext(Context);
 
   return (
-    <Grid item xs={12}>
+    <Grid item xs={12} lg={6}>
       <Card>
         <CardContent>
           <Grid container spacing={1} sx={{ marginBottom: '15px' }}>

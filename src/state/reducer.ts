@@ -11,10 +11,10 @@ export const initialTelemetry: TelemetryState = {
       time: Date.now(), long: 16.03152757395328, lat: 69.29509714200718, alt: 0,
     },
   ],
-  velocity: [],
+  vertical_velocity: [],
   acceleration: [],
   angular_velocity: [],
-  altitude: [],
+  agl: [],
   temperature: [],
   fsmState: null,
 };
@@ -93,6 +93,13 @@ export default function reducer(state: any, action: any) {
           newState.telemetry.angular_velocity = [
             ...state.telemetry.angular_velocity,
             { ...parsedMessage.angular_velocity, time: packetTimestamp },
+          ].slice(-PACKETS_WINDOW);
+        }
+
+        if (parsedMessage.agl !== null) {
+          newState.telemetry.agl = [
+            ...state.telemetry.agl,
+            { value: parsedMessage.agl / 100, time: packetTimestamp },
           ].slice(-PACKETS_WINDOW);
         }
       } catch (e) {

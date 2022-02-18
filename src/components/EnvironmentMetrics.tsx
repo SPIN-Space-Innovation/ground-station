@@ -8,34 +8,42 @@ import BiaxialLineChart from './BiaxialLineChart';
 import StatusCard from './StatusCard';
 import Context from '../state/Context';
 
-const zipStats = (altitude: any, temperature: any) => ({
-  time: altitude.time,
-  altitude: altitude.value,
-  temperature: temperature.value,
+const zipStats = (agl: DataPoint, verticalVelocity: DataPoint) => ({
+  time: agl.time,
+  agl: agl.value,
+  vertical_velocity: verticalVelocity?.value,
 });
 
 export default function EnvironmentMetrics() {
   const { state } = React.useContext(Context);
 
   return (
-    <Grid item xs={12}>
+    <Grid item xs={12} lg={6}>
       <Card>
         <CardContent>
           <Grid container spacing={1} sx={{ marginBottom: '15px' }}>
-            <Grid item xs={6}>
-              <StatusCard label="Altitude" value={_.last(state.altitude) ? `${formatNumber((_.last(state.altitude) as any).value)}m` : 'Unknown'} />
-            </Grid>
-            <Grid item xs={6}>
-              <StatusCard label="State" value={state.fsmState || 'Unknown'} />
-            </Grid>
+            {['agl', 'vertical_velocity'].map((metric) => {
+              const label = {
+                agl: 'Above Ground Level',
+                vertical_velocity: 'Vertical Velocity',
+              }[metric];
+              const unit = {
+                agl: 'm',
+                vertical_velocity: 'm/s',
+              }[metric];
+
+              return (
+                <Grid item xs={6}>
+                  <StatusCard label={label as string} value={_.last(state[metric]) ? `${formatNumber((_.last(state[metric]) as any).value)} ${unit}` : 'Unknown'} />
+                </Grid>
+              );
+            })}
           </Grid>
           <BiaxialLineChart options={{
-            labels: ['Altitude(m)', 'Temperature (℃)'],
-            data: _.zipWith(state.altitude, state.temperature, zipStats),
-            dataKeys: ['altitude', 'temperature'],
-            formatters: [
-              (alt: any) => (alt > 1000 ? `${alt / 1000}k` : alt),
-            ],
+            labels: ['AGL (m)', 'Vertical Velocity (m/s))'],
+            data: _.zipWith(state.agl, state.vertical_velocity, zipStats),
+            dataKeys: ['agl', 'vertical_velocity'],
+            formatters: [],
           }}
           />
         </CardContent>

@@ -56,10 +56,10 @@ type TelemetryState = {
   battery_voltage: DataPoint[],
   free_memory: DataPoint[],
   position: any[],
-  velocity: any[],
+  vertical_velocity: any[],
   acceleration: InertialDataPoint[],
   angular_velocity: InertialDataPoint[],
-  altitude: any[],
+  agl: any[],
   temperature: any[],
   fsmState: string | null,
 };
