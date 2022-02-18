@@ -18,3 +18,31 @@ body {
 .globe-wrapper canvas {
   margin: auto
 }
+
+.raw-logs-container {
+  position: relative;
+}
+
+.raw-logs {
+  height: 300px;
+  width: 100%;
+  background: rgba(0, 0, 0, 1);
+  border: none;
+  color: #b2bec3;
+  font-weight: bold;
+  overflow: auto;
+  box-sizing: border-box;
+  line-height: 16px;
+  resize: none;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.raw-logs-container .live-toggle {
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: #fff;
+  background: rgba(255,255,255,0.2);
+  padding-left: 16px;
+}

@@ -70,15 +70,15 @@ export default function reducer(state: any, action: any) {
           rssi: [
             ...newState.telemetry.rssi,
             { value: packet.rssi, time: packetTimestamp },
-          ],
+          ].slice(-PACKETS_WINDOW),
           battery_voltage: [
             ...newState.telemetry.battery_voltage,
             { value: parsedMessage.battery_voltage, time: packetTimestamp },
-          ],
+          ].slice(-PACKETS_WINDOW),
           free_memory: [
             ...newState.telemetry.free_memory,
             { value: parsedMessage.free_memory, time: packetTimestamp },
-          ],
+          ].slice(-PACKETS_WINDOW),
         };
 
         newState.telemetry.fsmState = parsedMessage.fsm_state;

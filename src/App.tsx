@@ -8,9 +8,10 @@ import reducer, { initialState } from './state/reducer';
 import * as actions from './state/actions';
 import Context from './state/Context';
 import EnvironmentMetrics from './components/EnvironmentMetrics';
+import InternalStats from './components/InternalStats';
+import RawLogs from './components/RawLogs';
 
 import './App.css';
-import InternalStats from './components/InternalStats';
 
 function App() {
   const [state, dispatch] = React.useReducer(reducer, initialState);
@@ -40,6 +41,12 @@ function App() {
       <Context.Provider value={{ state: state.telemetry, dispatch }}>
         <Box sx={{ flexGrow: 1, padding: '10px' }}>
           <Grid container spacing={2}>
+            <Grid item xs={6}>
+              <RawLogs />
+            </Grid>
+            <Grid item xs={6}>
+              test
+            </Grid>
             <EnvironmentMetrics />
             <InternalStats />
             <InertialMeasurements />
