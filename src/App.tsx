@@ -10,9 +10,10 @@ import Context from './state/Context';
 import EnvironmentMetrics from './components/EnvironmentMetrics';
 import InternalStats from './components/InternalStats';
 import RawLogs from './components/RawLogs';
+import FSMControls from './components/FSMControls';
+import RocketLocation from './components/RocketLocation';
 
 import './App.css';
-import FSMControls from './components/FSMControls';
 
 function App() {
   const [state, dispatch] = React.useReducer(reducer, initialState);
@@ -48,7 +49,7 @@ function App() {
             <InternalStats />
             <InertialMeasurements />
           </Grid>
-          <GlobeWrapper />
+          <RocketLocation />
         </Box>
       </Context.Provider>
     </div>
