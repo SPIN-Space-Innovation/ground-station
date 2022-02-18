@@ -10,6 +10,7 @@ import Context from './state/Context';
 import EnvironmentMetrics from './components/EnvironmentMetrics';
 
 import './App.css';
+import InternalStats from './components/InternalStats';
 
 function App() {
   const [state, dispatch] = React.useReducer(reducer, initialState);
@@ -40,6 +41,7 @@ function App() {
         <Box sx={{ flexGrow: 1, padding: '10px' }}>
           <Grid container spacing={2}>
             <EnvironmentMetrics />
+            <InternalStats />
             <InertialMeasurements />
           </Grid>
           <GlobeWrapper />
