@@ -33,7 +33,7 @@ export default function InternalStats() {
               }[metric];
 
               return (
-                <Grid item xs={6}>
+                <Grid key={unit} item xs={6}>
                   <StatusCard label={label as string} value={_.last(state[metric]) ? `${formatNumber((_.last(state[metric]) as any).value)} ${unit}` : 'Unknown'} />
                 </Grid>
               );
