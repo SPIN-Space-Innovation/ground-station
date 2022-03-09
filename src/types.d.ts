@@ -71,7 +71,7 @@ type AppState = {
 
 type TripleLineChartProps = {
   label: string,
-  data: number[],
+  data: any[],
   dataKeys: [string, string, string]
 };
 
