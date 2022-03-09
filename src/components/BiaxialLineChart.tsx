@@ -1,67 +1,104 @@
 import React from 'react';
-import {
-  CartesianGrid, Legend, Line, LineChart, ReferenceLine,
-  ResponsiveContainer, Tooltip, XAxis, YAxis,
-} from 'recharts';
+import uPlot, { AlignedData } from 'uplot';
 import { timeTickFormatter } from '../lib/helpers';
+
+const lineColors = ['#8884d8', '#82ca9d'];
+const createPlotOptions = (options: any) => ({
+  width: 400,
+  height: 400,
+  scales: {
+    x: {
+      time: false,
+    },
+  },
+  series: [
+    {
+      value: (u: any, time: number) => timeTickFormatter(time),
+      label: 'Time',
+    },
+    ...options.dataKeys.map((key: string, index: number) => ({
+      label: key,
+      scale: options.labels[index],
+      value: (u: any, v: any) => (
+        options.formatters[index] ? options.formatters[index](v) : v
+      ),
+      stroke: lineColors[index],
+      width: 1.5,
+    })),
+  ],
+  axes: [
+    {
+      values: (self: any, splits: any) => (
+        splits.map((v: any) => (v == null ? null : timeTickFormatter(v)))
+      ),
+      gap: 2,
+    },
+    ...[3, 1].map((side, index) => ({
+      scale: options.labels[index],
+      label: options.labels[index] || '',
+      side,
+    })),
+  ],
+});
 
 export default function BiaxialLineChart(props: BiaxialLineChartProps) {
   const { options } = props;
 
+  const [plotInitialized, setPlotInitialized] = React.useState(false);
+  const [sizeObserver, setSizeObserver] = React.useState<ResizeObserver | null>(null);
+
+  const elem = React.useRef<HTMLDivElement | null>(null);
+  const wrapperElem = React.useRef<HTMLDivElement | null>(null);
+  const plotRef = React.useRef<uPlot | null>(null);
+  const mounted = React.useRef<true | null>(null);
+
+  const opts = createPlotOptions(options);
+
+  // update plot data
+  React.useEffect(() => {
+    if (!mounted.current) {
+      mounted.current = true;
+    } else if (plotRef.current) {
+      const plotData: AlignedData = [
+        options.data.map((point: any) => point.time),
+        options.data.map((point: any) => point[options.dataKeys[0]]),
+        options.data.map((point: any) => point[options.dataKeys[1]]),
+      ];
+      plotRef.current.setData(plotData, true);
+    }
+  });
+
+  // initialize plot
+  React.useEffect(() => {
+    if (elem.current && !plotInitialized) {
+      setPlotInitialized(true);
+      /* eslint-disable new-cap */
+      plotRef.current = new uPlot(opts, [[]], elem.current);
+    }
+  }, [elem.current]);
+
+  // watch for resize
+  React.useEffect(() => {
+    if (wrapperElem.current && !sizeObserver) {
+      const observer = new ResizeObserver(() => {
+        if (!plotRef.current || !wrapperElem.current) {
+          return;
+        }
+        plotRef.current.setSize({ width: wrapperElem.current.offsetWidth, height: 400 });
+      });
+      observer.observe(wrapperElem.current);
+      setSizeObserver(observer);
+    }
+
+    return () => {
+      sizeObserver?.disconnect();
+      setSizeObserver(null);
+    };
+  }, [wrapperElem.current]);
+
   return (
-    <ResponsiveContainer width="100%" height={400}>
-      <LineChart
-        data={options.data}
-        margin={{
-          top: 5, right: 10, left: 10, bottom: 5,
-        }}
-        syncId={1}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-
-        <XAxis
-          dataKey="time"
-          tickFormatter={timeTickFormatter}
-          tick={{ fontSize: 12 }}
-        />
-
-        {[0, 1].map((_, index) => (
-          <YAxis
-            key={options.labels[index]}
-            yAxisId={index === 0 ? 'left' : 'right'}
-            label={{
-              value: options.labels[index],
-              angle: index === 0 ? -90 : 90,
-              position: index === 0 ? 'insideLeft' : 'insideRight',
-              offset: 0,
-            }}
-            tickFormatter={options.formatters[index]}
-            tick={{ fontSize: 12 }}
-            orientation={index === 0 ? 'left' : 'right'}
-          />
-        ))}
-
-        <Tooltip
-          labelFormatter={timeTickFormatter}
-          isAnimationActive={false}
-        />
-
-        <Legend />
-
-        {[0, 1].map((_, index) => (
-          <Line
-            key={options.dataKeys[index]}
-            yAxisId={index === 0 ? 'left' : 'right'}
-            isAnimationActive={false}
-            type="monotone"
-            dataKey={options.dataKeys[index]}
-            stroke={index === 0 ? '#8884d8' : '#82ca9d'}
-            dot={false}
-          />
-        ))}
-
-        <ReferenceLine yAxisId="left" y={100000} label="Karman Line" stroke="red" />
-      </LineChart>
-    </ResponsiveContainer>
+    <div ref={wrapperElem}>
+      <div ref={elem} className="uplot-chart" />
+    </div>
   );
 }

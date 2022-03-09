@@ -43,7 +43,7 @@ export default function InternalStats() {
             labels: ['Battery (V)', 'Free Memory (kb)'],
             data: _.zipWith(state.battery_voltage, state.free_memory, zipStats),
             dataKeys: ['battery_voltage', 'free_memory'],
-            formatters: [],
+            formatters: [(voltage) => (formatNumber(voltage))],
           }}
           />
         </CardContent>
