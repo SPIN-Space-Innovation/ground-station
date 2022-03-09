@@ -22,7 +22,7 @@ const createPlotOptions = (dataKeys: [string, string, string], label: string) =>
       scale: label,
       value: (u: any, v: any) => (v == null ? '-' : v),
       stroke: lineColors[index],
-      width: 1 / devicePixelRatio,
+      width: 1.5,
     })),
   ],
   axes: [
