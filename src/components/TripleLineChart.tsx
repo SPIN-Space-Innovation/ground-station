@@ -36,6 +36,11 @@ const createPlotOptions = (dataKeys: [string, string, string], label: string) =>
       scale: label,
     },
   ],
+  cursor: {
+    sync: {
+      key: 'charts',
+    },
+  },
 });
 
 export default function TripleLineChart(props: TripleLineChartProps) {

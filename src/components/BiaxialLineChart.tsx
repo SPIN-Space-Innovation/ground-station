@@ -39,6 +39,11 @@ const createPlotOptions = (options: any) => ({
       side,
     })),
   ],
+  cursor: {
+    sync: {
+      key: 'charts',
+    },
+  },
 });
 
 export default function BiaxialLineChart(props: BiaxialLineChartProps) {
