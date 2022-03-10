@@ -22,6 +22,7 @@
     "react-leaflet": "^3.2.5",
     "react-scripts": "5.0.0",
     "recharts": "^2.1.8",
+    "serve": "^13.0.2",
     "typescript": "^4.5.5",
     "uplot": "^1.6.19",
     "web-vitals": "^2.1.4"
@@ -30,7 +31,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "lint": "npx eslint src/*.{tsx,ts} src/*/**.{tsx,ts}"
+    "lint": "npx eslint src/*.{tsx,ts} src/*/**.{tsx,ts}",
+    "serve": "npx serve -s build"
   },
   "browserslist": {
     "production": [
