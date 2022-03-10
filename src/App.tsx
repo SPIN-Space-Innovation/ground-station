@@ -1,7 +1,6 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import GlobeWrapper from './components/GlobeWrapper';
 import InertialMeasurements from './components/InertialMeasurements';
 import Header from './components/Header';
 import reducer, { initialState } from './state/reducer';
