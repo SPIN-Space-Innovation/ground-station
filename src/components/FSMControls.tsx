@@ -7,6 +7,12 @@ import Context from '../state/Context';
 export default function FSMControls() {
   const { state } = React.useContext(Context);
 
+  const sendCommand = (command: string) => {
+    if (state.socket) {
+      state.socket.send(`COMMAND:${command}`);
+    }
+  };
+
   return (
     <Grid item xs={12} md={6}>
       <Card>
@@ -21,7 +27,7 @@ export default function FSMControls() {
               flexGrow: 1, textAlign: 'center', fontWeight: 'bold',
             }}
           >
-            {state.fsmState}
+            {state.telemetry.fsmState}
           </Typography>
           <div>
             <Button
@@ -31,18 +37,19 @@ export default function FSMControls() {
               variant="contained"
               size="large"
               color="error"
+              onClick={() => sendCommand('trigger_fts')}
             >
               Flight Termination
             </Button>
           </div>
           <div className="fsm-actions">
-            <Button variant="contained" size="large">
+            <Button variant="contained" size="large" onClick={() => sendCommand('init_calibration')}>
               Calibrate
             </Button>
-            <Button variant="contained" size="large">
+            <Button variant="contained" size="large" onClick={() => sendCommand('launched')}>
               LAUNCHED
             </Button>
-            <Button variant="contained" size="large">
+            <Button variant="contained" size="large" onClick={() => sendCommand('set_ejection_test_mode')}>
               EJECTION_TEST
             </Button>
           </div>

@@ -44,7 +44,9 @@ function App() {
         <Box sx={{ flexGrow: 1, padding: '10px' }}>
           <Grid container spacing={2}>
             <RawLogs />
-            <FSMControls />
+            <Context.Provider value={{ state, dispatch }}>
+              <FSMControls />
+            </Context.Provider>
             <EnvironmentMetrics />
             <InternalStats />
             <InertialMeasurements />
