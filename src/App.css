@@ -1,0 +1,74 @@
+body {
+  background: #eee;
+}
+
+.app-bar .status {
+  text-align: center;
+}
+
+.app-bar .logo {
+  max-width: 40px;
+  margin-right: 20px;
+}
+
+.globe-wrapper {
+  margin-top: 20px;
+}
+
+.globe-wrapper canvas {
+  margin: auto
+}
+
+.raw-logs-container {
+  position: relative;
+  height: 300px;
+}
+
+.raw-logs {
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 1);
+  border: none;
+  color: #b2bec3;
+  font-weight: bold;
+  overflow: auto;
+  box-sizing: border-box;
+  line-height: 16px;
+  resize: none;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.raw-logs-container .live-toggle {
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: #000;
+  background: rgba(255,255,255);
+  padding-left: 16px;
+  border-top-right-radius: 5px;
+}
+
+.fsm-controls {
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+}
+
+.fsm-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  width: 100%;
+}
+
+.fsm-actions button {
+  flex: 1;
+  margin: 0 5px;
+}
+
+.leaflet-container {
+  margin: 10px auto;
+  width: calc(100% - 20px);
+  height: 600px;
+}
