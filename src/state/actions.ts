@@ -3,7 +3,7 @@ export const receivedData = (data: string) => ({
   payload: data,
 });
 
-export const setSocketOpen = (status: boolean) => ({
+export const setSocketOpen = (status: boolean, socket?: WebSocket) => ({
   type: 'SET_SOCKET_OPEN',
-  payload: status,
+  payload: { status, socket },
 });

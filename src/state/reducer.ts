@@ -21,6 +21,7 @@ export const initialTelemetry: TelemetryState = {
 
 export const initialState: AppState = {
   socketOpen: null,
+  socket: null,
   telemetry: _.clone(initialTelemetry),
 };
 
@@ -38,7 +39,8 @@ export default function reducer(state: any, action: any) {
     case 'SET_SOCKET_OPEN':
       return {
         ...state,
-        socketOpen: action.payload,
+        socketOpen: action.payload.status,
+        socket: action.payload.socket,
       };
     case 'RECEIVED_DATA':
       const { payload } = action;

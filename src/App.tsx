@@ -21,7 +21,7 @@ function App() {
   React.useEffect(() => {
     const socket = new WebSocket('ws://localhost:8080');
 
-    socket.addEventListener('open', () => dispatch(actions.setSocketOpen(true)));
+    socket.addEventListener('open', () => dispatch(actions.setSocketOpen(true, socket)));
     socket.addEventListener('close', () => dispatch(actions.setSocketOpen(false)));
     socket.addEventListener('error', () => dispatch(actions.setSocketOpen(false)));
 

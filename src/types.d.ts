@@ -66,6 +66,7 @@ type TelemetryState = {
 
 type AppState = {
   socketOpen: boolean | null,
+  socket: WebSocket | null,
   telemetry: TelemetryState,
 };
 
