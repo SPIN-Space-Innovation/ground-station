@@ -1,5 +1,4 @@
 import React from 'react';
-import _ from 'lodash';
 import uPlot, { AlignedData } from 'uplot';
 import { timeTickFormatter } from '../lib/helpers';
 
