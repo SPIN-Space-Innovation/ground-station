@@ -29,7 +29,8 @@ module.exports = {
     'no-param-reassign': 'off',
     'react/jsx-no-constructed-context-values': 'off',
     'consistent-return': 'off',
-    '@typescript-eslint/no-explicit-any': 'off'
+    '@typescript-eslint/no-explicit-any': 'off',
+    'linebreak-style': 0
   },
   settings: {
     'import/resolver': {
