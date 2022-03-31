@@ -87,8 +87,8 @@ export function parseTelemetryMessage(message: string): ParsedMessage {
     gps: {
       fixed: !!parseInt(parts[15], 10),
       satellites: parts.length >= 9 ? parseInt(parts[16], 10) : null,
-      longitude: 0, // TODO
-      latitude: 0, // TODO
+      latitude: parts.length >= 9 ? parseInt(parts[17], 10) / 10000000 : 0,
+      longitude: parts.length >= 9 ? parseInt(parts[18], 10) / 10000000 : 0,
     },
   };
 
