@@ -1,7 +1,7 @@
 const fs = require('fs')
 const delay = require('delay')
 const readline = require('readline')
-const influxdbLogger = require('../message-handler/loggers/influxdb')
+const influxdbLogger = require('../telemetry-handler/loggers/influxdb')
 
 const fileStream = fs.createReadStream('./FLIGHT.LOG')
 const rl = readline.createInterface({
