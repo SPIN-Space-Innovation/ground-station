@@ -104,6 +104,15 @@ export default function reducer(state: any, action: any) {
               { value: parsedMessage.agl / 100, time: packetTimestamp },
             ].slice(-PACKETS_WINDOW);
           }
+
+          newState.telemetry.position = [
+            ...state.telemetry.position,
+            {
+              lat: parsedMessage.gps.latitude,
+              long: parsedMessage.gps.longitude,
+              time: packetTimestamp,
+            },
+          ].slice(-PACKETS_WINDOW);
         }
       } catch (e) {
         // eslint-disable-next-line no-console
