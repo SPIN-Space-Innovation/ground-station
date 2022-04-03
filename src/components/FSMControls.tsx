@@ -60,7 +60,7 @@ export default function FSMControls() {
             <StatusIndicator cols={3} label="Igniter Continuity" status={false} />
             <StatusIndicator cols={3} label="GPS Fix" status={state.telemetry.gps_fix} />
             <Grid item xs={3} className="status-indicator">
-              <span className="igniter_option">{state.telemetry.selected_igniter}</span>
+              <span className="igniter_option">{state.telemetry.selected_igniter ? `P${state.telemetry.selected_igniter}` : ''}</span>
               Selected Igniter
             </Grid>
           </Grid>

@@ -115,6 +115,7 @@ body {
 }
 
 .igniter_option {
+  padding: 0 5px;
   background: #efefef;
   border-radius: 4px;
   line-height: 25px;
