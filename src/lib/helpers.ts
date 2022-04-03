@@ -73,6 +73,8 @@ export function parseTelemetryMessage(message: string): ParsedMessage {
     free_memory: parseInt(parts[3], 10),
     battery_voltage: parseInt(parts[4], 10),
     fsm_state: parts[5],
+    sd_logs: parts[6] === '1',
+    selected_igniter: parseInt(parts[7], 10),
     agl: parts.length >= 9 ? parseInt(parts[8], 10) : null,
     acceleration: {
       x: parts.length >= 9 ? parseInt(parts[9], 10) / 100 : null,

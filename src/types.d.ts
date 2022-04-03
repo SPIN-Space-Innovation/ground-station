@@ -10,6 +10,8 @@ type ParsedMessage = {
   free_memory: number,
   battery_voltage: number,
   fsm_state: string,
+  sd_logs: boolean,
+  selected_igniter: number,
   agl: number | null,
   acceleration: { // m/s^2
     x: number | null,
@@ -62,6 +64,9 @@ type TelemetryState = {
   agl: any[],
   temperature: any[],
   fsmState: string | null,
+  sd_logs: boolean | null,
+  selected_igniter: number | null,
+  gps_fix: boolean | null
 };
 
 type AppState = {
