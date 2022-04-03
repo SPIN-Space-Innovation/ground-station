@@ -52,7 +52,6 @@ body {
 .fsm-controls {
   display: flex;
   flex-direction: column;
-  height: 200px;
 }
 
 .fsm-actions {
@@ -71,4 +70,42 @@ body {
   margin: 10px auto;
   width: calc(100% - 20px);
   height: 600px;
+}
+
+.status-indicators {
+  margin-top: 27px;
+}
+
+.status-indicator {
+  text-align: center;
+  font-weight: bold;
+}
+
+.igniter_option, .circle {
+  height: 25px;
+  width: 25px;
+  display: block;
+  margin: 0 auto 10px auto;
+}
+
+.circle {
+  border-radius: 50%;
+  background: grey;
+  box-shadow: 0 0px 6px grey;
+}
+
+.circle.enabled {
+  background: #00a500;
+  box-shadow: 0 0px 6px #00a500;
+}
+
+.circle.disabled {
+  background: #a50000;
+  box-shadow: 0 0px 6px #a50000;
+}
+
+.igniter_option {
+  background: #efefef;
+  border-radius: 4px;
+  line-height: 25px;
 }
