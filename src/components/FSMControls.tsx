@@ -57,11 +57,11 @@ export default function FSMControls() {
 
           <Grid container className="status-indicators">
             <StatusIndicator cols={3} label="SD Logging" status={state.telemetry.sd_logs} />
-            <StatusIndicator cols={3} label="Igniter Continuity" status={false} />
             <StatusIndicator cols={3} label="GPS Fix" status={state.telemetry.gps_fix} />
+            <StatusIndicator cols={3} label="Igniter Continuity" status={false} />
             <Grid item xs={3} className="status-indicator">
               <span className="igniter_option">{state.telemetry.selected_igniter ? `P${state.telemetry.selected_igniter}` : ''}</span>
-              Selected Igniter
+              Igniter Channel
             </Grid>
           </Grid>
         </CardContent>
