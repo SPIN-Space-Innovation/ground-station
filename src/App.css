@@ -66,6 +66,16 @@ body {
   margin: 0 5px;
 }
 
+.fsm-actions button:nth-child(1) {
+  flex: 1;
+  margin-left: 0;
+}
+
+.fsm-actions button:last-child {
+  flex: 1;
+  margin-right: 0;
+}
+
 .leaflet-container {
   margin: 10px auto;
   width: calc(100% - 20px);
