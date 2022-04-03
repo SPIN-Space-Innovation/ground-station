@@ -3,6 +3,7 @@ import {
   Grid, Card, CardContent, Typography, Button,
 } from '@mui/material';
 import Context from '../state/Context';
+import StatusIndicator from './StatusIndicator';
 
 export default function FSMControls() {
   const { state } = React.useContext(Context);
@@ -53,6 +54,16 @@ export default function FSMControls() {
               EJECTION_TEST
             </Button>
           </div>
+
+          <Grid container className="status-indicators">
+            <StatusIndicator cols={3} label="SD Logging" status={state.telemetry.sd_logs} />
+            <StatusIndicator cols={3} label="Igniter Continuity" status={false} />
+            <StatusIndicator cols={3} label="GPS Fix" status={state.telemetry.gps_fix} />
+            <Grid item xs={3} className="status-indicator">
+              <span className="igniter_option">{state.telemetry.selected_igniter}</span>
+              Selected Igniter
+            </Grid>
+          </Grid>
         </CardContent>
       </Card>
     </Grid>
