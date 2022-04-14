@@ -13,6 +13,7 @@ import FSMControls from './components/FSMControls';
 import RocketLocation from './components/RocketLocation';
 
 import './App.css';
+import ControlsPasswordModal from './components/ControlsPasswordModal';
 
 function App() {
   const [state, dispatch] = React.useReducer(reducer, initialState);
@@ -45,6 +46,7 @@ function App() {
             <RawLogs />
             <Context.Provider value={{ state, dispatch }}>
               <FSMControls />
+              <ControlsPasswordModal />
             </Context.Provider>
             <EnvironmentMetrics />
             <InternalStats />

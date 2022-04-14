@@ -26,6 +26,8 @@ export const initialState: AppState = {
   socketOpen: null,
   socket: null,
   telemetry: _.clone(initialTelemetry),
+  actionsLocked: true,
+  controlsPasswordModal: false,
 };
 
 /*
@@ -44,6 +46,16 @@ export default function reducer(state: any, action: any) {
         ...state,
         socketOpen: action.payload.status,
         socket: action.payload.socket,
+      };
+    case 'SET_ACTIONS_LOCKED':
+      return {
+        ...state,
+        actionsLocked: action.payload.lockStatus,
+      };
+    case 'TOGGLE_CONTROLS_PASSWORD_MODAL':
+      return {
+        ...state,
+        controlsPasswordModal: !state.controlsPasswordModal,
       };
     case 'RECEIVED_DATA':
       const { payload } = action;

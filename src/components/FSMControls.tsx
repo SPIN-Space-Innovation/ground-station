@@ -2,11 +2,14 @@ import React from 'react';
 import {
   Grid, Card, CardContent, Typography, Button,
 } from '@mui/material';
+import LockIcon from '@mui/icons-material/Lock';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
 import Context from '../state/Context';
 import StatusIndicator from './StatusIndicator';
+import * as actions from '../state/actions';
 
 export default function FSMControls() {
-  const { state } = React.useContext(Context);
+  const { state, dispatch } = React.useContext(Context);
 
   const sendCommand = (command: string) => {
     if (state.socket) {
@@ -14,12 +17,23 @@ export default function FSMControls() {
     }
   };
 
+  const toggleControlsPasswordModal = () => {
+    if (state.actionsLocked) {
+      dispatch(actions.toggleControlsPasswordModal());
+    } else {
+      dispatch(actions.setActionsLock(true));
+    }
+  };
+
   return (
     <Grid item xs={12} md={6}>
       <Card>
         <CardContent className="fsm-controls">
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+          <Typography sx={{ fontSize: 14, display: 'flex', justifyContent: 'space-between' }} color="text.secondary" gutterBottom>
             State Machine
+            {state.actionsLocked
+              ? (<LockIcon className="lock-icon" onClick={toggleControlsPasswordModal} />)
+              : (<LockOpenIcon className="lock-icon" onClick={toggleControlsPasswordModal} />)}
           </Typography>
           <Typography
             variant="h4"
@@ -38,19 +52,35 @@ export default function FSMControls() {
               variant="contained"
               size="large"
               color="error"
+              disabled={state.actionsLocked}
               onClick={() => sendCommand('trigger_fts')}
             >
               Flight Termination
             </Button>
           </div>
           <div className="fsm-actions">
-            <Button variant="contained" size="large" onClick={() => sendCommand('init_calibration')}>
+            <Button
+              variant="contained"
+              size="large"
+              disabled={state.actionsLocked}
+              onClick={() => sendCommand('init_calibration')}
+            >
               Calibrate
             </Button>
-            <Button variant="contained" size="large" onClick={() => sendCommand('launched')}>
+            <Button
+              variant="contained"
+              size="large"
+              disabled={state.actionsLocked}
+              onClick={() => sendCommand('launched')}
+            >
               LAUNCHED
             </Button>
-            <Button variant="contained" size="large" onClick={() => sendCommand('set_ejection_test_mode')}>
+            <Button
+              variant="contained"
+              size="large"
+              disabled={state.actionsLocked}
+              onClick={() => sendCommand('set_ejection_test_mode')}
+            >
               EJECTION_TEST
             </Button>
           </div>

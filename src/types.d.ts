@@ -73,6 +73,8 @@ type AppState = {
   socketOpen: boolean | null,
   socket: WebSocket | null,
   telemetry: TelemetryState,
+  actionsLocked: boolean,
+  controlsPasswordModal: boolean
 };
 
 type TripleLineChartProps = {
