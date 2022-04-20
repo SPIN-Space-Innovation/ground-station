@@ -1,3 +1,5 @@
+import IconButton from '@mui/material/IconButton';
+import BarChartIcon from '@mui/icons-material/BarChart';
 import React from 'react';
 import uPlot, { AlignedData } from 'uplot';
 import { timeTickFormatter } from '../lib/helpers';
@@ -50,6 +52,7 @@ export default function BiaxialLineChart(props: BiaxialLineChartProps) {
   const { options } = props;
 
   const [plotInitialized, setPlotInitialized] = React.useState(false);
+  const [plotVisible, setPlotVisible] = React.useState(true);
   const [sizeObserver, setSizeObserver] = React.useState<ResizeObserver | null>(null);
 
   const elem = React.useRef<HTMLDivElement | null>(null);
@@ -58,6 +61,7 @@ export default function BiaxialLineChart(props: BiaxialLineChartProps) {
   const mounted = React.useRef<true | null>(null);
 
   const opts = createPlotOptions(options);
+  const plotClasses = plotVisible ? '' : 'hidden';
 
   // update plot data
   React.useEffect(() => {
@@ -101,9 +105,22 @@ export default function BiaxialLineChart(props: BiaxialLineChartProps) {
     };
   }, [wrapperElem.current]);
 
+  const togglePlot = () => {
+    setPlotVisible(!plotVisible);
+  };
+
   return (
     <div ref={wrapperElem}>
-      <div ref={elem} className="uplot-chart" />
+      <div className="plot-toggle-wrapper">
+        <IconButton color={plotVisible ? 'primary' : 'default'} className="plot-toggle">
+          <BarChartIcon className="lock-icon" fontSize="large" onClick={togglePlot} />
+        </IconButton>
+      </div>
+      <div ref={elem} className={`uplot-chart ${plotClasses}`} />
+
+      {!plotVisible && (
+        <div className="plot-placeholder" />
+      )}
     </div>
   );
 }

@@ -124,3 +124,16 @@ body {
 .lock-icon {
   cursor: pointer;
 }
+
+.plot-placeholder {
+  height: 430px;
+}
+
+.plot-toggle-wrapper {
+  display: block;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
