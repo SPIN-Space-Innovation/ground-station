@@ -13,6 +13,8 @@ type ParsedMessage = {
   sd_logs: boolean,
   selected_igniter: number,
   agl: number | null,
+  pressure: number | null,
+  temperature: number | null,
   acceleration: { // m/s^2
     x: number | null,
     y: number | null,

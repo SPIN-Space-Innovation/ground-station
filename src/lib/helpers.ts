@@ -76,21 +76,23 @@ export function parseTelemetryMessage(message: string): ParsedMessage {
     sd_logs: parts[6] === '1',
     selected_igniter: parseInt(parts[7], 10),
     agl: parts.length >= 9 ? parseInt(parts[8], 10) : null,
+    pressure: parts.length >= 9 ? parseInt(parts[9], 10) : null,
+    temperature: parts.length >= 9 ? parseInt(parts[10], 10) / 100 : null,
     acceleration: {
-      x: parts.length >= 9 ? parseInt(parts[9], 10) / 100 : null,
-      y: parts.length >= 9 ? parseInt(parts[10], 10) / 100 : null,
-      z: parts.length >= 9 ? parseInt(parts[11], 10) / 100 : null,
+      x: parts.length >= 9 ? parseInt(parts[11], 10) / 100 : null,
+      y: parts.length >= 9 ? parseInt(parts[12], 10) / 100 : null,
+      z: parts.length >= 9 ? parseInt(parts[13], 10) / 100 : null,
     },
     angular_velocity: {
-      x: parts.length >= 9 ? parseInt(parts[12], 10) : null,
-      y: parts.length >= 9 ? parseInt(parts[13], 10) : null,
-      z: parts.length >= 9 ? parseInt(parts[14], 10) : null,
+      x: parts.length >= 9 ? parseInt(parts[14], 10) : null,
+      y: parts.length >= 9 ? parseInt(parts[15], 10) : null,
+      z: parts.length >= 9 ? parseInt(parts[16], 10) : null,
     },
     gps: {
-      fixed: !!parseInt(parts[15], 10),
-      satellites: parts.length >= 9 ? parseInt(parts[16], 10) : null,
-      latitude: parts.length >= 9 ? parseInt(parts[17], 10) / 10000000 : 0,
-      longitude: parts.length >= 9 ? parseInt(parts[18], 10) / 10000000 : 0,
+      fixed: !!parseInt(parts[17], 10),
+      satellites: parts.length >= 9 ? parseInt(parts[18], 10) : null,
+      latitude: parts.length >= 9 ? parseInt(parts[19], 10) / 10000000 : 0,
+      longitude: parts.length >= 9 ? parseInt(parts[20], 10) / 10000000 : 0,
     },
   };
 
