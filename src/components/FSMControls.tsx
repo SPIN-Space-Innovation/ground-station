@@ -71,6 +71,14 @@ export default function FSMControls() {
               variant="contained"
               size="large"
               disabled={state.actionsLocked}
+              onClick={() => sendCommand('go_idle')}
+            >
+              IDLE
+            </Button>
+            <Button
+              variant="contained"
+              size="large"
+              disabled={state.actionsLocked}
               onClick={() => sendCommand('launched')}
             >
               LAUNCHED
