@@ -1,7 +1,7 @@
 const fs = require('fs')
 const delay = require('delay')
 const readline = require('readline')
-const influxdbLogger = require('../telemetry-handler/loggers/influxdb')
+const influxdbLogger = require('../../telemetry-handler/loggers/influxdb')
 
 const fileStream = fs.createReadStream('./FLIGHT.LOG')
 const rl = readline.createInterface({
@@ -18,7 +18,7 @@ rl.on('line', (line) => {
   } else if (message_prefix === '0,') {
     data = line.split(',')
     met = +data[2];
-    time = new Date(new Date(startTime.getTime()).setMilliseconds(startTime.getMilliseconds() + met))
+    time = new Date(new Date(startTime.getTime()).setMilliseconds(startTime.getMilliseconds() + met + 60000*8))
 
     messages.push([JSON.stringify({message: line, rssi: 0}), time.getTime()])
   }

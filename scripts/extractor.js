@@ -20,7 +20,7 @@ const rl = readline.createInterface({
 
 const startTime = new Date()
 const messages = []
-const dataPointIndex = 10;
+const dataPointIndex = 8;
 rl.on('line', (line) => {
   message_prefix = line.substr(0,2)
   if (message_prefix === '1,') {

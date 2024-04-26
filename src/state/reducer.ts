@@ -18,7 +18,6 @@ export const initialTelemetry: TelemetryState = {
   temperature: [],
   fsmState: null,
   sd_logs: null,
-  selected_igniter: null,
   gps_fix: null,
 };
 
@@ -100,7 +99,6 @@ export default function reducer(state: any, action: any) {
 
           newState.telemetry.fsmState = parsedMessage.fsm_state;
           newState.telemetry.sd_logs = parsedMessage.sd_logs;
-          newState.telemetry.selected_igniter = parsedMessage.selected_igniter;
           newState.telemetry.gps_fix = parsedMessage.gps.fixed;
           if (parsedMessage.acceleration.x !== null) {
             newState.telemetry.acceleration = [
